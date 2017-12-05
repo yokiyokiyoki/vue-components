@@ -1,5 +1,7 @@
 <template>
-  <div><g-chart></g-chart></div>
+    <div>
+      <g-chart></g-chart>
+    </div>
 </template>
 <script>
     export default {};
