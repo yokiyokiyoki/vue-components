@@ -5,9 +5,9 @@
   export default {
     name: 'g-charts',
     data() {
-      return {};
+      return {}
     },
     methods: {}
-  };
+  }
 
 </script>
