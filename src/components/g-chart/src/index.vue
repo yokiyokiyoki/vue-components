@@ -3,11 +3,10 @@
 </template>
 <script>
   export default {
-    name: 'g-charts',
+    name: "g-chart",
     data() {
-      return {}
+      return {};
     },
     methods: {}
-  }
-
+  };
 </script>
