@@ -1,3 +1,10 @@
+<style lang="less" scoped>
+  .chart-box {
+    height: 100%;
+    width: 100%;
+  }
+</style>
+
 <template>
   <div class="chart-box">11</div>
 </template>
