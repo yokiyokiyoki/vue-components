@@ -1,7 +1,7 @@
 <style lang="less" scoped>
   .chart-box {
-    height: 340px;
-    width: 100px;
+    height: 100%;
+    width: 100%;
   }
 </style>
 
@@ -70,7 +70,6 @@
               this.instance = ec.init(this.$el, "default");
               this.instance.setOption(this.options, true);
               // expose ECharts events as custom events（遍历echart事件emit）
-
               ACTION_EVENTS.forEach(event => {
                 this.instance.on(event, params => {
                   this.$emit(event, params);
