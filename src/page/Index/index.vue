@@ -7,5 +7,15 @@
     </div>
 </template>
 <script>
-  export default {};
+  import axios from "axios";
+  export default {
+    mounted() {
+      axios.post("/account/checkLogin").then(res => {
+        console.log(res);
+      });
+      axios.get("/mock/profile").then(res => {
+        console.log(res);
+      });
+    }
+  };
 </script>

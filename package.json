@@ -8,12 +8,17 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "mock": "json-server --watch mock/db.json",
+    "mockdev": "npm-run-all --parallel dev mock"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "echarts": "^3.8.5",
+    "json-server": "^0.12.1",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
+    "npm-run-all": "^4.1.2",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

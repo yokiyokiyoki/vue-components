@@ -1,0 +1,1 @@
+//全局插件，从directive，filters，proxy（请求）
