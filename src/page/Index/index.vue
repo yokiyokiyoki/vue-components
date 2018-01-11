@@ -10,13 +10,13 @@
   import axios from "axios";
   export default {
     mounted() {
-      axios.post("/account/checkLogin").then(res => {
-        console.log(res);
-      });
-      axios.get("/mock/profile").then(res => {
-        console.log(res);
-      });
-      this.$proxy({ url: "a" }, { mock: false });
+      // axios.post("/account/checkLogin").then(res => {
+      //   console.log(res);
+      // });
+      // axios.get("/mock/profile").then(res => {
+      //   console.log(res);
+      // });
+      this.$proxy({ url: "/account/checkLogin", method: "post" });
     }
   };
 </script>
