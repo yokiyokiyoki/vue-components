@@ -16,6 +16,7 @@
       axios.get("/mock/profile").then(res => {
         console.log(res);
       });
+      this.$proxy({ url: "a" }, { mock: false });
     }
   };
 </script>
