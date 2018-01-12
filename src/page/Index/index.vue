@@ -16,7 +16,12 @@
       // axios.get("/mock/profile").then(res => {
       //   console.log(res);
       // });
-      this.$proxy({ url: "/account/checkLogin", method: "post" });
+      let res = this.$proxy({ url: "/account/checkLogin", method: "post" });
+      console.log(
+        res.then(data => {
+          console.log(data);
+        })
+      );
     }
   };
 </script>
