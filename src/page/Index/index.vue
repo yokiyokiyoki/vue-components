@@ -15,7 +15,7 @@ export default {
     };
   },
   async mounted() {
-    axios.get("/mock/profile").then(res => {
+    this.$proxy({ url: "/mock/profile" }).then(res => {
       console.log(res);
     });
     login.call(this);
