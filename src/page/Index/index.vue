@@ -7,21 +7,30 @@
     </div>
 </template>
 <script>
-  import axios from "axios";
-  export default {
-    mounted() {
-      // axios.post("/account/checkLogin").then(res => {
-      //   console.log(res);
-      // });
-      // axios.get("/mock/profile").then(res => {
-      //   console.log(res);
-      // });
-      let res = this.$proxy({ url: "/account/checkLogin", method: "post" });
-      console.log(
-        res.then(data => {
-          console.log(data);
-        })
-      );
+import axios from "axios";
+export default {
+  data() {
+    return {
+      taskList: []
+    };
+  },
+  async mounted() {
+    axios.get("/mock/profile").then(res => {
+      console.log(res);
+    });
+    login.call(this);
+  }
+};
+async function login() {
+  // 登录mig请求
+  return await this.$proxy({
+    url: "/mig/login",
+    method: "post",
+    data: {
+      username: "datatub",
+      password: "82ab2b9931cc341c2bee4f4cbbd1e217",
+      _rand: 9501
     }
-  };
+  });
+}
 </script>

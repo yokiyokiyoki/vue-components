@@ -19,9 +19,10 @@ module.exports = {
           '^/mock': ''
         }
       },
-      //一个是代理线上的
-      '/': {
-        target: 'http://radar.ipsos.com.cn',
+      // 一个是代理线上的 '/': {   target: 'http://radar.ipsos.com.cn',   changeOrigin: true
+      // },
+      '/mig': {
+        target: 'http://mig.datastory.com.cn',
         changeOrigin: true
       }
     },
