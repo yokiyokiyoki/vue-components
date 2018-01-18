@@ -6,7 +6,7 @@ const dom = {
     let top = dom.offsetTop
     // 如果该元素的offsetParent存在，递归算出top
     if (dom.offsetParent !== null) {
-      top += getOffsetTop(dom.offsetParent)
+      top += this.getOffsetTop(dom.offsetParent)
     }
     return top
   },
@@ -14,7 +14,7 @@ const dom = {
   getOffsetLeft (dom) {
     let left = dom.offsetLeft
     if (dom.offsetParent !== null) {
-      left += getOffsetLeft(dom.offsetParent)
+      left += this.getOffsetLeft(dom.offsetParent)
     }
     return left
   }
