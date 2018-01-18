@@ -2,5 +2,7 @@
   <div class="ripple">hi</div>
 </template>
 <script>
-export default {};
+export default {
+  name: "g-ripple"
+};
 </script>
