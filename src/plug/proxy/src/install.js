@@ -7,6 +7,9 @@ const router = new vueRouter()
 const instance = axios.create()
 const CancelToken = axios.CancelToken
 const install = function (Vue, option = {}) {
+  // 一次引用，防止多次调用
+  if (install.installed) return
+  install.installed = true
   Util(Vue)
   Vue.prototype.$proxy = (ajaxParams = {}, ajaxOpt) => {
     // 根据url和data生成唯一key
