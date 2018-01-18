@@ -13,8 +13,6 @@ const install = function (Vue, option = {}) {
     const ajaxKey = `${ajaxParams.url}?${JSON.stringify(
       ajaxParams.data || ajaxParams.params || null
     )}`
-    setAjaxMap(Vue, ajaxKey)
-    console.log(ajaxKey, Vue.ajaxMap)
     ajaxOpt = Object.assign(
       {
         mock: false, // 默认不开启mock数据
@@ -38,14 +36,13 @@ const install = function (Vue, option = {}) {
         }
       ]
     }
-
     // 默认参数
     ajaxParams = Object.assign(
       {
         // abort掉请求
         cancelToken: new CancelToken(function executor (c) {
           // An executor function receives a cancel function as a parameter
-          //   console.log(c)
+          setAjaxMap(Vue, ajaxKey, c)
         })
       },
       ajaxParams
@@ -66,11 +63,19 @@ const install = function (Vue, option = {}) {
     )
     return instance(ajaxParams)
       .then(res => {
+        delAjaxMap(Vue, ajaxKey)
         return res.data
       })
       .catch(err => {
+        delAjaxMap(Vue, ajaxKey)
         return err
       })
+  }
+  Vue.abort = Vue.prototype.$abort = () => {
+    for (let key in Vue.ajaxMap) {
+      Vue.ajaxMap[key]()
+      delAjaxMap(Vue, key)
+    }
   }
 }
 export default install

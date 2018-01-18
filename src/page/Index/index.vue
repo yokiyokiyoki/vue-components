@@ -14,12 +14,13 @@ export default {
       taskList: []
     };
   },
-  async mounted() {
+  async created() {
     this.$proxy({ url: "/mock/profile" }).then(res => {
       console.log(res);
     });
     login.call(this);
-  }
+  },
+  mounted() {}
 };
 async function login() {
   // 登录mig请求
