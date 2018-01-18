@@ -9,6 +9,7 @@
   color: #fff;
   cursor: pointer;
 }
+
 </style>
 
 <template>

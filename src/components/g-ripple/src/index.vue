@@ -46,7 +46,6 @@ export default {
       }).$mount();
       // 在文档之外渲染并且随后挂载
       this.$refs["covers"].appendChild(coverInstance.$el);
-      console.log(offsetTop, offsetLeft);
     }
   }
 };
