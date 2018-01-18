@@ -1,5 +1,9 @@
 import GChart from './g-chart'
+import GRipple from './g-ripple'
+const components = [GChart, GRipple]
 const install = function (Vue, opt = {}) {
-  Vue.component(GChart.name, GChart)
+  components.forEach(component => {
+    Vue.component(component.name, component)
+  })
 }
 export default install
