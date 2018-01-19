@@ -9,10 +9,6 @@ plugs.forEach(plug => {
   Vue.use(plug)
 })
 
-Directives.forEach(directive => {
-  Vue.directive(directive)
-})
-
 for (let key in directives) {
   Vue.directive(key, directives[key])
 }

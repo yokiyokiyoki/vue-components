@@ -7,6 +7,7 @@ const ctx = '@@clickoutsideContext'
 let startClick
 let seed = 0
 
+// 先绑定document的鼠标事件
 !Vue.prototype.$isServer && dom.on(document, 'mousedown', e => (startClick = e))
 
 !Vue.prototype.$isServer &&
@@ -14,6 +15,7 @@ let seed = 0
     nodeList.forEach(node => node[ctx].documentHandler(e, startClick))
   })
 
+// 去除掉除该el
 function createDocumentHandler (el, binding, vnode) {
   return function (mouseup = {}, mousedown = {}) {
     if (

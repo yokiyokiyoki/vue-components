@@ -15,13 +15,16 @@
 <template>
   <div>
       <button @click='$router.push("/")'>back</button>
-      <div>
+      <div >
         <g-ripple>
-          <a class="test">水波涟漪</a>
+          <a class="test" ref='test'>水波涟漪</a>
         </g-ripple>
       </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  methods: {},
+  mounted() {}
+};
 </script>
