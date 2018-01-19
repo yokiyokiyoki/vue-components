@@ -33,8 +33,8 @@ export default {
       let clientY = event.pageY;
 
       //获取点击相对容器的坐标
-      let left = clientX - offsetTop;
-      let top = clientY - offsetLeft;
+      let left = clientX - offsetLeft;
+      let top = clientY - offsetTop;
 
       //手动创建一个未挂载的实例,传入data以覆盖
       let coverInstance = new coverExtend({
@@ -51,6 +51,5 @@ export default {
 };
 </script>
 <style lang="less" src='./ripple.less'>
-
 
 </style>
