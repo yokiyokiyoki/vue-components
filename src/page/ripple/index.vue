@@ -15,12 +15,11 @@
 <template>
   <div>
       <button @click='$router.push("/")' v-clickoutside='clickoutside'>back</button>
-      <div >
-        <g-ripple >
-          <a class="test" ref='test' v-title='title'>水波涟漪</a>
+      <div>
+        <g-ripple v-title='title'>
+          <a class="test" ref='test' >水波涟漪</a>
         </g-ripple> 
       </div>
-      <span v-title='title' style="margin:100px;">显示title</span>
   </div>
 </template>
 <script>
@@ -35,8 +34,6 @@ export default {
       console.log("clickoutside");
     }
   },
-  mounted() {
-    // this.title = "11";
-  }
+  mounted() {}
 };
 </script>

@@ -4,6 +4,7 @@
     <div>
       <button @click="$router.push('/chart')">图表组件</button>
       <button @click="$router.push('/ripple')">涟漪组件</button>
+      <button @click="$router.push('/calendar')">日历组件</button>
       <router-view></router-view>
     </div>
 </template>

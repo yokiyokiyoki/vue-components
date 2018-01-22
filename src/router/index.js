@@ -3,6 +3,8 @@ import Router from 'vue-router'
 const Index = () => import('@/page/Index')
 const Chart = () => import('@/page/chart')
 const Ripple = () => import('@/page/ripple')
+const Calendar = () => import('@/page/calendar')
+
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -20,6 +22,11 @@ export default new Router({
       path: '/ripple',
       name: 'Ripple',
       component: Ripple
+    },
+    {
+      path: '/calendar',
+      name: 'Calendar',
+      component: Calendar
     }
   ]
 })
