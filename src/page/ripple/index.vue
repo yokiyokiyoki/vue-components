@@ -9,25 +9,34 @@
   color: #fff;
   cursor: pointer;
 }
+
 </style>
 
 <template>
   <div>
-      <button @click='$router.push("/")' v-clickoutside='test'>back</button>
+      <button @click='$router.push("/")' v-clickoutside='clickoutside'>back</button>
       <div >
-        <g-ripple>
-          <a class="test" ref='test'>水波涟漪</a>
-        </g-ripple>
+        <g-ripple >
+          <a class="test" ref='test' v-title='title'>水波涟漪</a>
+        </g-ripple> 
       </div>
+      <span v-title='title' style="margin:100px;">显示title</span>
   </div>
 </template>
 <script>
 export default {
+  data() {
+    return {
+      title: "水波涟漪组件"
+    };
+  },
   methods: {
-    test() {
-      console.log(11);
+    clickoutside() {
+      console.log("clickoutside");
     }
   },
-  mounted() {}
+  mounted() {
+    // this.title = "11";
+  }
 };
 </script>

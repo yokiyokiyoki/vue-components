@@ -19,7 +19,8 @@ export default {
       console.log(res);
     });
     login.call(this);
-  }
+  },
+  methods: {}
 };
 async function login() {
   // 登录mig请求
