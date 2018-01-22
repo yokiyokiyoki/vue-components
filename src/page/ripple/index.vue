@@ -9,12 +9,11 @@
   color: #fff;
   cursor: pointer;
 }
-
 </style>
 
 <template>
   <div>
-      <button @click='$router.push("/")'>back</button>
+      <button @click='$router.push("/")' v-clickoutside='test'>back</button>
       <div >
         <g-ripple>
           <a class="test" ref='test'>水波涟漪</a>
@@ -24,7 +23,11 @@
 </template>
 <script>
 export default {
-  methods: {},
+  methods: {
+    test() {
+      console.log(11);
+    }
+  },
   mounted() {}
 };
 </script>
