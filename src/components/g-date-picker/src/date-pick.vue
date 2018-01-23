@@ -1,11 +1,103 @@
+<style lang="less" scoped>
+.picker-panel {
+  font-size: 12px;
+  &-header {
+  }
+  &-content {
+    &-cells {
+      width: 196px;
+      height: 196px;
+      .cells {
+        &-header {
+          span {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            margin: 2px;
+            color: #bbbec4;
+          }
+        }
+        &-content {
+          .cell {
+            width: 28px;
+            height: 28px;
+            display: inline-block;
+            cursor: pointer;
+            user-select: none;
+            em {
+              width: 24px;
+              height: 24px;
+              line-height: 24px;
+              text-align: center;
+              margin: 2px;
+              font-style: normal;
+              border-radius: 3px;
+              display: inline-block;
+            }
+            &-prev-month,
+            &-next-month {
+              color: #bbbec4;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+</style>
+
 <template>
-  <div></div>
+  <div class="picker-panel">
+    <div class="picker-panel-header"></div>
+    <div class="picker-panel-content">
+      <div class="picker-panel-content-cells">
+        <div class="cells-header">
+          <span v-for='day in headerDays' :key='day'>{{day}}</span>
+        </div>
+        <div class="cells-content">
+          <span :class="getCellCls(cell)" v-for='(cell,index) in cells' :key='index' >
+            <em>{{cell.dayNum}}</em>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {
   name: "g-date-picker",
-  mounted() {}
+  data() {
+    return {
+      headerDays: ["日", "一", "二", "三", "四", "五", "六"],
+      cells: []
+    };
+  },
+  created() {
+    this.cells = getMonthDaysArr(2018, 1, 22);
+  },
+  mounted() {
+    console.log(this.cells);
+  },
+  methods: {
+    getCellCls(cell) {
+      return [
+        "cell",
+        {
+          [`cell-selected`]: cell.selected || cell.start || cell.end,
+          [`cell-disabled`]: cell.disabled,
+          [`cell-today`]: cell.type === "today",
+          [`cell-prev-month`]: cell.type === "prev-month",
+          [`cell-next-month`]: cell.type === "next-month",
+          [`cell-range`]: cell.range && !cell.start && !cell.end
+        }
+      ];
+    }
+  }
 };
+
+// 关于星期
+// 0是代表周日
 
 //获取月份天数,拿到下个月的第0天
 function getMonthDays(year, month) {
@@ -34,7 +126,9 @@ function getMonthDaysArr(year, month, day) {
       //日期天数
       dayNum: preDays - thisMonthFirstDayInWeek + i + 1,
       //周几
-      weekday: i
+      weekday: i,
+      //上个月
+      type: "prev-month"
     });
   }
   //当月
@@ -43,11 +137,11 @@ function getMonthDaysArr(year, month, day) {
       //日期天数
       dayNum: i,
       //周几
-      weekday: (this.thisMonthFirstDayInWeek + i - 1) % 7,
+      weekday: (thisMonthFirstDayInWeek + i - 1) % 7,
       //是否是选中的那天
       selected: i === +day,
-      //是否是当月
-      isThisMonth: true
+      //当月
+      type: "this-month"
     });
   }
   //下个月
@@ -56,7 +150,9 @@ function getMonthDaysArr(year, month, day) {
       //日期天数
       dayNum: i,
       //  周几
-      weekday: (thisMonthFirstDayInWeek + days + i - 1) % 7
+      weekday: (thisMonthFirstDayInWeek + days + i - 1) % 7,
+      //下个月
+      type: "next-month"
     });
   }
   return dateArr;
