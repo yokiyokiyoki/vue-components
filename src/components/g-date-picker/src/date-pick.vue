@@ -65,6 +65,7 @@
   </div>
 </template>
 <script>
+import moment from "moment";
 export default {
   name: "g-date-picker",
   data() {
@@ -110,6 +111,7 @@ function getWeekday(year, month, day) {
 }
 
 function getMonthDaysArr(year, month, day) {
+  // console.log(moment(`${year}/${month}/${day}`));
   let dateArr = [];
   // 获取当月多少天
   let days = getMonthDays(year, month);
@@ -119,16 +121,23 @@ function getMonthDaysArr(year, month, day) {
   let thisMonthFirstDayInWeek = getWeekday(year, month, 1);
   //获取当月最后一天是周几
   let thisMonthLastDayInWeek = getWeekday(year, month, days);
+  //上月和下月
+  let prevMonth = month == 1 ? 12 : month - 1;
+  let nextMonth = month == 12 ? 1 : month + 1;
 
   //上月
   for (let i = 0; i < thisMonthFirstDayInWeek; i++) {
+    let dayNum = preDays - thisMonthFirstDayInWeek + i + 1;
+    year = month == 1 ? year - 1 : year;
     dateArr.push({
       //日期天数
-      dayNum: preDays - thisMonthFirstDayInWeek + i + 1,
+      dayNum,
       //周几
       weekday: i,
       //上个月
-      type: "prev-month"
+      type: "prev-month",
+      //所属日期
+      date: `${year}/${prevMonth}/${dayNum}`
     });
   }
   //当月
@@ -141,18 +150,23 @@ function getMonthDaysArr(year, month, day) {
       //是否是选中的那天
       selected: i === +day,
       //当月
-      type: "this-month"
+      type: "this-month",
+      //所属日期
+      date: `${year}/${month}/${i}`
     });
   }
   //下个月
   for (let i = 1; i < 6 - thisMonthLastDayInWeek; i++) {
+    year = month == 12 ? year + 1 : year;
     dateArr.push({
       //日期天数
       dayNum: i,
       //  周几
       weekday: (thisMonthFirstDayInWeek + days + i - 1) % 7,
       //下个月
-      type: "next-month"
+      type: "next-month",
+      //所属日期
+      date: `${year}/${nextMonth}/${i}`
     });
   }
   return dateArr;
