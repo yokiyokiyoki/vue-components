@@ -24,6 +24,7 @@
             display: inline-block;
             cursor: pointer;
             user-select: none;
+            border-radius: 3px;
             &-selected {
               background: #2d8cf0;
               color: #fff;
@@ -60,7 +61,7 @@
           <span v-for='day in headerDays' :key='day'>{{day}}</span>
         </div>
         <div class="cells-content">
-          <span :class="getCellCls(cell)" v-for='(cell,index) in cells' :key='index' >
+          <span :class="getCellCls(cell)" v-for='(cell,index) in cells' :key='index' @click='handleCell(cell)'>
             <em>{{cell.dayNum}}</em>
           </span>
         </div>
@@ -96,7 +97,8 @@ export default {
           [`cell-next-month`]: cell.type === "next-month"
         }
       ];
-    }
+    },
+    handleCell(cell) {}
   }
 };
 
@@ -139,8 +141,10 @@ function getMonthDaysArr(year, month, day) {
       weekday: i,
       //上个月
       type: "prev-month",
-      //所属日期
-      date: `${year}/${prevMonth}/${dayNum}`
+      //所属年
+      year,
+      //所属月
+      month: prevMonth
     });
   }
   //当月在日历的显示
@@ -154,8 +158,10 @@ function getMonthDaysArr(year, month, day) {
       selected: i === +day,
       //当月
       type: "this-month",
-      //所属日期
-      date: `${year}/${month}/${i}`
+      //所属年
+      year,
+      //所属月
+      month
     });
   }
   //下个月，换到下一行就是14，该行就用7
@@ -168,8 +174,10 @@ function getMonthDaysArr(year, month, day) {
       weekday: (thisMonthFirstDayInWeek + days + i - 1) % 7,
       //下个月
       type: "next-month",
-      //所属日期
-      date: `${year}/${nextMonth}/${i}`
+      //所属年
+      year,
+      //所属月
+      month: nextMonth
     });
   }
   return dateArr;
