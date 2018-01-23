@@ -25,6 +25,8 @@
             cursor: pointer;
             user-select: none;
             border-radius: 3px;
+            //增加动画
+            transition: all 0.2s ease-in-out;
             &-selected {
               background: #2d8cf0;
               color: #fff;
@@ -98,7 +100,9 @@ export default {
         }
       ];
     },
-    handleCell(cell) {}
+    handleCell(cell) {
+      this.cells = getMonthDaysArr(cell.year, cell.month, cell.dayNum);
+    }
   }
 };
 
@@ -115,7 +119,7 @@ function getWeekday(year, month, day) {
   return new Date(year, month - 1, day).getDay();
 }
 
-function getMonthDaysArr(year, month, day) {
+function getMonthDaysArr(year, month, day = 1) {
   // console.log(moment(`${year}/${month}/${day}`));
   let dateArr = [];
   // 获取当月多少天
