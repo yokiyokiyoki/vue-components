@@ -1,9 +1,39 @@
 <style lang="less" scoped>
 .picker-panel {
   font-size: 12px;
+  width: 216px;
   &-header {
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-bottom: 1px solid #e9eaec;
+    &-icon-btn {
+      display: inline-block;
+      width: 20px;
+      height: 24px;
+      line-height: 26px;
+      margin-top: 4px;
+      text-align: center;
+      cursor: pointer;
+      color: #bbbec4;
+      transition: color 0.2s ease-in-out;
+      &.picker-prev-btn {
+        float: left;
+      }
+      &.picker-prev-btn-arrow-double {
+        float: left;
+      }
+      &.picker-next-btn {
+        float: right;
+      }
+      &.picker-next-btn-arrow-double {
+        float: right;
+      }
+    }
   }
   &-content {
+    display: inline-block;
+    padding: 10px;
     &-cells {
       width: 196px;
       height: 196px;
@@ -30,6 +60,9 @@
             &-selected {
               background: #2d8cf0;
               color: #fff;
+              &:hover {
+                color: #fff;
+              }
             }
             em {
               width: 24px;
@@ -45,6 +78,11 @@
             &-next-month {
               color: #bbbec4;
             }
+            &-this-month {
+              &:hover {
+                color: #409eff;
+              }
+            }
           }
         }
       }
@@ -56,7 +94,16 @@
 
 <template>
   <div class="picker-panel">
-    <div class="picker-panel-header"></div>
+    <div class="picker-panel-header">
+      <span class="picker-panel-header-icon-btn picker-prev-btn-arrow-double"><<</span>
+      <span class="picker-panel-header-icon-btn picker-prev-btn"><</span>
+      <span>
+        <span class="picker-header-label">{{date.year}}年</span>
+        <span class="picker-header-label">{{date.month}}月</span>
+      </span>
+      <span class="picker-panel-header-icon-btn picker-next-btn-arrow-double">>></span>
+      <span class="picker-panel-header-icon-btn picker-next-btn">></span>
+    </div>
     <div class="picker-panel-content">
       <div class="picker-panel-content-cells">
         <div class="cells-header">
@@ -78,11 +125,20 @@ export default {
   data() {
     return {
       headerDays: ["日", "一", "二", "三", "四", "五", "六"],
-      cells: []
+      cells: [],
+      date: {
+        year: 2018,
+        month: 1,
+        day: 22
+      }
     };
   },
   created() {
-    this.cells = getMonthDaysArr(2018, 1, 22);
+    this.cells = getMonthDaysArr(
+      this.date.year,
+      this.date.month,
+      this.date.day
+    );
   },
   mounted() {
     console.log(this.cells);
@@ -94,13 +150,16 @@ export default {
         {
           [`cell-selected`]: cell.selected,
           [`cell-disabled`]: cell.disabled,
-          [`cell-today`]: cell.type === "today",
           [`cell-prev-month`]: cell.type === "prev-month",
-          [`cell-next-month`]: cell.type === "next-month"
+          [`cell-next-month`]: cell.type === "next-month",
+          [`cell-this-month`]: cell.type === "this-month"
         }
       ];
     },
     handleCell(cell) {
+      this.date.year = cell.year;
+      this.date.month = cell.month;
+      this.date.day = cell.day;
       this.cells = getMonthDaysArr(cell.year, cell.month, cell.dayNum);
     }
   }
