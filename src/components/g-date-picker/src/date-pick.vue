@@ -124,6 +124,7 @@ function getMonthDaysArr(year, month, day) {
   //上月和下月
   let prevMonth = month == 1 ? 12 : month - 1;
   let nextMonth = month == 12 ? 1 : month + 1;
+  console.log(thisMonthLastDayInWeek, days);
 
   //上月
   for (let i = 0; i < thisMonthFirstDayInWeek; i++) {
@@ -141,7 +142,7 @@ function getMonthDaysArr(year, month, day) {
     });
   }
   //当月
-  for (let i = 1; i < days; i++) {
+  for (let i = 1; i <= days; i++) {
     dateArr.push({
       //日期天数
       dayNum: i,
@@ -156,7 +157,7 @@ function getMonthDaysArr(year, month, day) {
     });
   }
   //下个月
-  for (let i = 1; i < 6 - thisMonthLastDayInWeek; i++) {
+  for (let i = 1; i < 7 - thisMonthLastDayInWeek; i++) {
     year = month == 12 ? year + 1 : year;
     dateArr.push({
       //日期天数
