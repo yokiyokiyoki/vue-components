@@ -24,6 +24,10 @@
             display: inline-block;
             cursor: pointer;
             user-select: none;
+            &-selected {
+              background: #2d8cf0;
+              color: #fff;
+            }
             em {
               width: 24px;
               height: 24px;
@@ -85,12 +89,11 @@ export default {
       return [
         "cell",
         {
-          [`cell-selected`]: cell.selected || cell.start || cell.end,
+          [`cell-selected`]: cell.selected,
           [`cell-disabled`]: cell.disabled,
           [`cell-today`]: cell.type === "today",
           [`cell-prev-month`]: cell.type === "prev-month",
-          [`cell-next-month`]: cell.type === "next-month",
-          [`cell-range`]: cell.range && !cell.start && !cell.end
+          [`cell-next-month`]: cell.type === "next-month"
         }
       ];
     }
@@ -124,9 +127,8 @@ function getMonthDaysArr(year, month, day) {
   //上月和下月
   let prevMonth = month == 1 ? 12 : month - 1;
   let nextMonth = month == 12 ? 1 : month + 1;
-  console.log(thisMonthLastDayInWeek, days);
 
-  //上月
+  //上月在日历的显示
   for (let i = 0; i < thisMonthFirstDayInWeek; i++) {
     let dayNum = preDays - thisMonthFirstDayInWeek + i + 1;
     year = month == 1 ? year - 1 : year;
@@ -141,7 +143,7 @@ function getMonthDaysArr(year, month, day) {
       date: `${year}/${prevMonth}/${dayNum}`
     });
   }
-  //当月
+  //当月在日历的显示
   for (let i = 1; i <= days; i++) {
     dateArr.push({
       //日期天数
@@ -156,8 +158,8 @@ function getMonthDaysArr(year, month, day) {
       date: `${year}/${month}/${i}`
     });
   }
-  //下个月
-  for (let i = 1; i < 7 - thisMonthLastDayInWeek; i++) {
+  //下个月，换到下一行就是14，该行就用7
+  for (let i = 1; i < 14 - thisMonthLastDayInWeek; i++) {
     year = month == 12 ? year + 1 : year;
     dateArr.push({
       //日期天数
