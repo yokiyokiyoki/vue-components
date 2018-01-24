@@ -14,10 +14,20 @@
     line-height: 32px;
     text-align: center;
     border-bottom: 1px solid @borderColor;
+    transition: color 0.2s ease-in-out;
     span {
       cursor: pointer;
-      &:hover {
-        color: @hoverColor;
+    }
+    &-label {
+      &.year {
+        &:hover {
+          color: @hoverColor;
+        }
+      }
+      &.month {
+        &:hover {
+          color: @hoverColor;
+        }
       }
     }
     &-icon-btn {
@@ -32,15 +42,27 @@
       transition: color 0.2s ease-in-out;
       &.picker-prev-btn {
         float: left;
+        &:hover {
+          color: @hoverColor;
+        }
       }
       &.picker-prev-btn-arrow-double {
         float: left;
+        &:hover {
+          color: @hoverColor;
+        }
       }
       &.picker-next-btn {
         float: right;
+        &:hover {
+          color: @hoverColor;
+        }
       }
       &.picker-next-btn-arrow-double {
         float: right;
+        &:hover {
+          color: @hoverColor;
+        }
       }
     }
   }
@@ -111,8 +133,8 @@
       <span class="picker-panel-header-icon-btn picker-prev-btn-arrow-double"><<</span>
       <span class="picker-panel-header-icon-btn picker-prev-btn"><</span>
       <span>
-        <span class="picker-header-label">{{date.year}}年</span>
-        <span class="picker-header-label">{{date.month}}月</span>
+        <span class="picker-panel-header-label year">{{date.year}}年</span>
+        <span class="picker-panel-header-label month">{{date.month}}月</span>
       </span>
       <span class="picker-panel-header-icon-btn picker-next-btn-arrow-double">>></span>
       <span class="picker-panel-header-icon-btn picker-next-btn">></span>
