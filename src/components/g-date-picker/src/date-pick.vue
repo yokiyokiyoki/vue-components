@@ -57,6 +57,15 @@
             border-radius: 3px;
             //增加动画
             transition: all 0.2s ease-in-out;
+            &-prev-month,
+            &-next-month {
+              color: #bbbec4;
+            }
+            &-this-month {
+              &:hover {
+                color: #409eff;
+              }
+            }
             &-selected {
               background: #2d8cf0;
               color: #fff;
@@ -73,15 +82,6 @@
               font-style: normal;
               border-radius: 3px;
               display: inline-block;
-            }
-            &-prev-month,
-            &-next-month {
-              color: #bbbec4;
-            }
-            &-this-month {
-              &:hover {
-                color: #409eff;
-              }
             }
           }
         }
