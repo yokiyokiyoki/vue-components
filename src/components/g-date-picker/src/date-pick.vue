@@ -196,7 +196,7 @@ function getMonthDaysArr(year, month, day = 1) {
   //上月在日历的显示
   for (let i = 0; i < thisMonthFirstDayInWeek; i++) {
     let dayNum = preDays - thisMonthFirstDayInWeek + i + 1;
-    year = month == 1 ? year - 1 : year;
+    let year = month == 1 ? year - 1 : year;
     dateArr.push({
       //日期天数
       dayNum,
@@ -229,7 +229,7 @@ function getMonthDaysArr(year, month, day = 1) {
   }
   //下个月，换到下一行就是14，该行就用7
   for (let i = 1; i < 14 - thisMonthLastDayInWeek; i++) {
-    year = month == 12 ? year + 1 : year;
+    let year = month == 12 ? year + 1 : year;
     dateArr.push({
       //日期天数
       dayNum: i,
