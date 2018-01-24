@@ -126,6 +126,7 @@ export default {
     return {
       headerDays: ["日", "一", "二", "三", "四", "五", "六"],
       cells: [],
+      //选中的日期
       date: {
         year: 2018,
         month: 1,
@@ -178,7 +179,7 @@ function getWeekday(year, month, day) {
   return new Date(year, month - 1, day).getDay();
 }
 
-function getMonthDaysArr(year, month, day = 1) {
+function getMonthDaysArr(year, month, day) {
   // console.log(moment(`${year}/${month}/${day}`));
   let dateArr = [];
   // 获取当月多少天
@@ -196,7 +197,7 @@ function getMonthDaysArr(year, month, day = 1) {
   //上月在日历的显示
   for (let i = 0; i < thisMonthFirstDayInWeek; i++) {
     let dayNum = preDays - thisMonthFirstDayInWeek + i + 1;
-    let year = month == 1 ? year - 1 : year;
+    let lastMonthYear = prevMonth == 12 ? year - 1 : year;
     dateArr.push({
       //日期天数
       dayNum,
@@ -205,7 +206,7 @@ function getMonthDaysArr(year, month, day = 1) {
       //上个月
       type: "prev-month",
       //所属年
-      year,
+      year: lastMonthYear,
       //所属月
       month: prevMonth
     });
@@ -229,7 +230,7 @@ function getMonthDaysArr(year, month, day = 1) {
   }
   //下个月，换到下一行就是14，该行就用7
   for (let i = 1; i < 14 - thisMonthLastDayInWeek; i++) {
-    let year = month == 12 ? year + 1 : year;
+    let nextMonthYear = nextMonth == 1 ? year + 1 : year;
     dateArr.push({
       //日期天数
       dayNum: i,
@@ -238,7 +239,7 @@ function getMonthDaysArr(year, month, day = 1) {
       //下个月
       type: "next-month",
       //所属年
-      year,
+      year: nextMonthYear,
       //所属月
       month: nextMonth
     });
