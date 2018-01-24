@@ -1,6 +1,9 @@
 <style lang="less" scoped>
 @hoverColor: #2d8cf0;
 @normalColor: #bbbec4;
+@borderColor: #e9eaec;
+@selectedBgColor: #2d8cf0;
+@selectedFontColor: #fff;
 .picker-panel {
   font-size: 12px;
   width: 216px;
@@ -8,7 +11,13 @@
     height: 32px;
     line-height: 32px;
     text-align: center;
-    border-bottom: 1px solid #e9eaec;
+    border-bottom: 1px solid @borderColor;
+    span {
+      cursor: pointer;
+      &:hover {
+        color: @hoverColor;
+      }
+    }
     &-icon-btn {
       display: inline-block;
       width: 20px;
@@ -69,10 +78,10 @@
               }
             }
             &-selected {
-              background: #2d8cf0;
-              color: #fff;
+              background: @selectedBgColor;
+              color: @selectedFontColor;
               &:hover {
-                color: #fff;
+                color: @selectedFontColor;
               }
             }
             em {
