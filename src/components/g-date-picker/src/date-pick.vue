@@ -4,6 +4,8 @@
 @borderColor: #e9eaec;
 @selectedBgColor: #2d8cf0;
 @selectedFontColor: #fff;
+@cellWidth: 24px;
+@cellHeight: 24px;
 .picker-panel {
   font-size: 12px;
   width: 216px;
@@ -51,8 +53,8 @@
       .cells {
         &-header {
           span {
-            width: 24px;
-            height: 24px;
+            width: @cellWidth;
+            height: @cellHeight;
             display: inline-block;
             margin: 2px;
             color: @normalColor;
@@ -60,8 +62,8 @@
         }
         &-content {
           .cell {
-            width: 28px;
-            height: 28px;
+            width: @cellWidth+4px;
+            height: @cellHeight+4px;
             display: inline-block;
             cursor: pointer;
             user-select: none;
@@ -85,9 +87,9 @@
               }
             }
             em {
-              width: 24px;
-              height: 24px;
-              line-height: 24px;
+              width: @cellWidth;
+              height: @cellHeight;
+              line-height: @cellHeight;
               text-align: center;
               margin: 2px;
               font-style: normal;
