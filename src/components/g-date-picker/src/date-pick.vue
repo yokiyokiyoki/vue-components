@@ -9,6 +9,7 @@
 .picker-panel {
   font-size: 12px;
   width: 216px;
+  border: 1px solid @normalColor;
   &-header {
     height: 32px;
     line-height: 32px;
@@ -48,6 +49,7 @@
       }
       &.picker-prev-btn-arrow-double {
         float: left;
+        margin-left: 10px;
         &:hover {
           color: @hoverColor;
         }
@@ -60,6 +62,7 @@
       }
       &.picker-next-btn-arrow-double {
         float: right;
+        margin-right: 10px;
         &:hover {
           color: @hoverColor;
         }
@@ -130,14 +133,14 @@
 <template>
   <div class="picker-panel">
     <div class="picker-panel-header">
-      <span class="picker-panel-header-icon-btn picker-prev-btn-arrow-double"><<</span>
-      <span class="picker-panel-header-icon-btn picker-prev-btn"><</span>
+      <span class="picker-panel-header-icon-btn picker-prev-btn-arrow-double" @click="handleClickHeaderIcon('lastYear')"><<</span>
+      <span class="picker-panel-header-icon-btn picker-prev-btn" @click="handleClickHeaderIcon('lastMonth')"><</span>
       <span>
-        <span class="picker-panel-header-label year">{{date.year}}年</span>
-        <span class="picker-panel-header-label month">{{date.month}}月</span>
+        <span class="picker-panel-header-label year">{{selectedDate.year}}年</span>
+        <span class="picker-panel-header-label month">{{selectedDate.month}}月</span>
       </span>
-      <span class="picker-panel-header-icon-btn picker-next-btn-arrow-double">>></span>
-      <span class="picker-panel-header-icon-btn picker-next-btn">></span>
+      <span class="picker-panel-header-icon-btn picker-next-btn-arrow-double" @click="handleClickHeaderIcon('nextYear')">>></span>
+      <span class="picker-panel-header-icon-btn picker-next-btn" @click="handleClickHeaderIcon('nextMonth')">></span>
     </div>
     <div class="picker-panel-content">
       <div class="picker-panel-content-cells">
@@ -162,7 +165,13 @@ export default {
       headerDays: ["日", "一", "二", "三", "四", "五", "六"],
       cells: [],
       //选中的日期
-      date: {
+      selectedDate: {
+        year: 2018,
+        month: 1,
+        day: 22
+      },
+      //界面上显示的日期
+      showDate: {
         year: 2018,
         month: 1,
         day: 22
@@ -171,15 +180,18 @@ export default {
   },
   created() {
     this.cells = getMonthDaysArr(
-      this.date.year,
-      this.date.month,
-      this.date.day
+      this.selectedDate.year,
+      this.selectedDate.month,
+      this.selectedDate.day
     );
   },
   mounted() {
     console.log(this.cells);
   },
   methods: {
+    handleClickHeaderIcon(flag) {
+      // flag=='lastYear'&&(getMonthDaysArr())
+    },
     getCellCls(cell) {
       return [
         "cell",
@@ -193,9 +205,9 @@ export default {
       ];
     },
     handleCell(cell) {
-      this.date.year = cell.year;
-      this.date.month = cell.month;
-      this.date.day = cell.day;
+      this.showDate.year = this.selectedDate.year = cell.year;
+      this.showDate.month = this.selectedDate.month = cell.month;
+      this.showDate.day = this.selectedDate.day = cell.day;
       this.cells = getMonthDaysArr(cell.year, cell.month, cell.dayNum);
     }
   }
