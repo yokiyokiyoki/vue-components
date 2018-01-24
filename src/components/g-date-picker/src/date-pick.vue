@@ -1,4 +1,6 @@
 <style lang="less" scoped>
+@hoverColor: #2d8cf0;
+@normalColor: #bbbec4;
 .picker-panel {
   font-size: 12px;
   width: 216px;
@@ -15,7 +17,7 @@
       margin-top: 4px;
       text-align: center;
       cursor: pointer;
-      color: #bbbec4;
+      color: @normalColor;
       transition: color 0.2s ease-in-out;
       &.picker-prev-btn {
         float: left;
@@ -44,7 +46,7 @@
             height: 24px;
             display: inline-block;
             margin: 2px;
-            color: #bbbec4;
+            color: @normalColor;
           }
         }
         &-content {
@@ -59,11 +61,11 @@
             transition: all 0.2s ease-in-out;
             &-prev-month,
             &-next-month {
-              color: #bbbec4;
+              color: @normalColor;
             }
             &-this-month {
               &:hover {
-                color: #409eff;
+                color: @hoverColor;
               }
             }
             &-selected {
