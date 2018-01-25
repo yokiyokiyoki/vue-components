@@ -20,6 +20,7 @@
     "less-loader": "^4.0.5",
     "moment": "^2.20.1",
     "npm-run-all": "^4.1.2",
+    "ramda": "^0.25.0",
     "tooltip.js": "^1.1.7",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"

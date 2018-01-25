@@ -136,8 +136,8 @@
       <span class="picker-panel-header-icon-btn picker-prev-btn-arrow-double" @click="handleClickHeaderIcon('lastYear')"><<</span>
       <span class="picker-panel-header-icon-btn picker-prev-btn" @click="handleClickHeaderIcon('lastMonth')"><</span>
       <span>
-        <span class="picker-panel-header-label year">{{selectedDate.year}}年</span>
-        <span class="picker-panel-header-label month">{{selectedDate.month}}月</span>
+        <span class="picker-panel-header-label year">{{showDate.year}}年</span>
+        <span class="picker-panel-header-label month">{{showDate.month}}月</span>
       </span>
       <span class="picker-panel-header-icon-btn picker-next-btn-arrow-double" @click="handleClickHeaderIcon('nextYear')">>></span>
       <span class="picker-panel-header-icon-btn picker-next-btn" @click="handleClickHeaderIcon('nextMonth')">></span>
@@ -158,6 +158,7 @@
 </template>
 <script>
 import moment from "moment";
+const R = require("ramda");
 export default {
   name: "g-date-picker",
   data() {
@@ -190,7 +191,43 @@ export default {
   },
   methods: {
     handleClickHeaderIcon(flag) {
-      // flag=='lastYear'&&(getMonthDaysArr())
+      R.cond([
+        [
+          R.equals("lastYear"),
+          () => {
+            this.showDate.year = this.showDate.year - 1;
+          }
+        ],
+        [
+          R.equals("lastMonth"),
+          () => {
+            this.showDate.month =
+              this.showDate.month == 1 ? 12 : this.showDate.month - 1;
+            this.showDate.year =
+              this.showDate.month == 12
+                ? this.showDate.year - 1
+                : this.showDate.year;
+          }
+        ],
+        [
+          R.equals("nextYear"),
+          () => {
+            this.showDate.year = this.showDate.year + 1;
+          }
+        ],
+        [
+          R.equals("nextMonth"),
+          () => {
+            this.showDate.month =
+              this.showDate.month == 12 ? 1 : this.showDate.month + 1;
+            this.showDate.year =
+              this.showDate.month == 1
+                ? this.showDate.year + 1
+                : this.showDate.year;
+          }
+        ]
+      ])(flag);
+      this.cells = getMonthDaysArr(this.showDate.year, this.showDate.month, 1);
     },
     getCellCls(cell) {
       return [
