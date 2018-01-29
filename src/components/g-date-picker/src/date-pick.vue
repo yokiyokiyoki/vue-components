@@ -74,7 +74,6 @@
       padding: 10px;
       &-cells {
         width: 196px;
-        height: 196px;
         .cells {
           &-header {
             span {
