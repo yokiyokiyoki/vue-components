@@ -8,14 +8,14 @@
     <div class="picker-panel-header">
       <span class="picker-panel-header-icon-btn picker-prev-btn-arrow-double" @click="handleClickHeaderIcon('lastYear')">
         << </span>
-          <span class="picker-panel-header-icon-btn picker-prev-btn" @click="handleClickHeaderIcon('lastMonth')">
+          <span class="picker-panel-header-icon-btn picker-prev-btn" @click="handleClickHeaderIcon('lastMonth')" v-if='type=="date"'>
             < </span>
               <span>
                 <span class="picker-panel-header-label year" @click='type="year"'>{{showDate.year}}年</span>
                 <span class="picker-panel-header-label month" @click='type="month"' v-if='type=="date"'>{{showDate.month}}月</span>
               </span>
               <span class="picker-panel-header-icon-btn picker-next-btn-arrow-double" @click="handleClickHeaderIcon('nextYear')">>></span>
-              <span class="picker-panel-header-icon-btn picker-next-btn" @click="handleClickHeaderIcon('nextMonth')">></span>
+              <span class="picker-panel-header-icon-btn picker-next-btn" @click="handleClickHeaderIcon('nextMonth')" v-if='type=="date"'>></span>
     </div>
     <div class="picker-panel-content">
       <date-table v-show='type=="date"' @handleDayCell='handleDayCell' :cells='dateCells'></date-table>
