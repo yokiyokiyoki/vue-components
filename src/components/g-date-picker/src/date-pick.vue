@@ -107,6 +107,7 @@ export default {
         this.selectedDate
       );
       this.monthCells = initMonthCells(this.showDate, this.selectedDate);
+      this.yearCells = initYearCells(this.showDate, this.selectedDate);
     },
     handleDayCell(cell) {
       let date = {
@@ -121,6 +122,7 @@ export default {
         this.selectedDate
       );
       this.monthCells = initMonthCells(this.showDate, this.selectedDate);
+      this.yearCells = initYearCells(this.showDate, this.selectedDate);
     },
     handleMonthCell(cell) {
       this.type = "date";
@@ -136,7 +138,10 @@ export default {
       );
     },
     handleYearCell(cell) {
-      console.log(cell);
+      this.type = "month";
+      this.showDate.year = cell.year;
+      this.yearCells = initYearCells(this.showDate, this.selectedDate);
+      this.monthCells = initMonthCells(this.showDate, this.selectedDate);
     }
   },
   components: {
