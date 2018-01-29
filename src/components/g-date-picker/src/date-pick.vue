@@ -18,7 +18,8 @@
               <span class="picker-panel-header-icon-btn picker-next-btn" @click="handleClickHeaderIcon('nextMonth')">></span>
     </div>
     <div class="picker-panel-content">
-      <date-table v-show='type=="date"' @handleDayCell='handleDayCell' :cells='cells'></date-table>
+      <date-table v-show='type=="date"' @handleDayCell='handleDayCell' :cells='dateCells'></date-table>
+      <month-table v-show='type=="month"' @handleDayCell='handleMonthCell' :cells='monthCells'></month-table>
     </div>
   </div>
 </template>
@@ -26,11 +27,15 @@
 import moment from "moment";
 const R = require("ramda");
 import dateTable from "./base/date-table";
+import monthTable from "./base/month-table";
+import yearTable from "./base/year-table";
 export default {
   name: "g-date-picker",
   data() {
     return {
-      cells: [],
+      dateCells: [],
+      monthCells: [],
+      yearCells: [],
       type: "date",
       //选中的日期
       selectedDate: {
@@ -47,10 +52,11 @@ export default {
     };
   },
   created() {
-    this.cells = getDaysArr(this.selectedDate, this.selectedDate);
+    this.dateCells = getDaysArr(this.selectedDate, this.selectedDate);
+    this.monthCells = initMonthCells(this.showDate, this.selectedDate);
   },
   mounted() {
-    console.log(this.cells);
+    console.log(this.dateCells);
   },
   methods: {
     handleClickHeaderIcon(flag) {
@@ -90,7 +96,7 @@ export default {
           }
         ]
       ])(flag);
-      this.cells = getDaysArr(
+      this.dateCells = getDaysArr(
         {
           year: this.showDate.year,
           month: this.showDate.month,
@@ -98,6 +104,8 @@ export default {
         },
         this.selectedDate
       );
+      this.monthCells = initMonthCells(this.showDate, this.selectedDate);
+      console.log(this.monthCells);
     },
     handleDayCell(cell) {
       let date = {
@@ -107,14 +115,20 @@ export default {
       };
       this.showDate = R.clone(date);
       this.selectedDate = R.clone(date);
-      this.cells = getDaysArr(
+      this.dateCells = getDaysArr(
         { year: cell.year, month: cell.month, day: cell.day },
         this.selectedDate
       );
+      this.monthCells = initMonthCells(this.showDate, this.selectedDate);
+    },
+    handleMonthCell(cell) {
+      console.log(cell);
     }
   },
   components: {
-    dateTable
+    dateTable,
+    monthTable,
+    yearTable
   }
 };
 /**
@@ -234,5 +248,18 @@ function getDaysArr({ year, month, day }, selectedDate = {}) {
     });
   }
   return dateArr;
+}
+function initMonthCells(showDate, selectedDate) {
+  let arr = [];
+  for (let i = 1; i <= 12; i++) {
+    let isSelected =
+      selectedDate.month == i && selectedDate.year == showDate.year;
+    arr.push({
+      month: i,
+      selected: isSelected,
+      year: showDate.year
+    });
+  }
+  return arr;
 }
 </script>

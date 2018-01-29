@@ -143,5 +143,27 @@
         }
       }
     }
+    &-month-cells {
+      width: 196px;
+      .cells-content {
+        .cell {
+          width: 40px;
+          height: 28px;
+          line-height: 28px;
+          margin: 10px 12px;
+          border-radius: 3px;
+          display: inline-block;
+          text-align: center;
+          cursor: pointer;
+          &-selected {
+            color: @selectedFontColor;
+            background-color: @selectedBgColor;
+          }
+          em {
+            font-style: normal;
+          }
+        }
+      }
+    }
   }
 }

@@ -5,7 +5,7 @@
         </div>
         <div class="cells-content">
             <span :class="getCellCls(cell)" v-for='(cell,index) in cells' :key='index' @click='handleCell(cell)'>
-            <em>{{cell.day}}</em>
+                <em>{{cell.day}}</em>
             </span>
         </div>
     </div>
