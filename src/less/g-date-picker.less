@@ -171,5 +171,33 @@
         }
       }
     }
+    &-year-cells {
+      width: 196px;
+      .cells-content {
+        .cell {
+          width: 40px;
+          height: 28px;
+          line-height: 28px;
+          margin: 10px 12px;
+          border-radius: 3px;
+          display: inline-block;
+          text-align: center;
+          cursor: pointer;
+          &:hover {
+            color: @selectedBgColor;
+          }
+          &-selected {
+            color: @selectedFontColor;
+            background-color: @selectedBgColor;
+            &:hover {
+              color: @selectedFontColor;
+            }
+          }
+          em {
+            font-style: normal;
+          }
+        }
+      }
+    }
   }
 }

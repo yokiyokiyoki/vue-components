@@ -12,7 +12,7 @@
             < </span>
               <span>
                 <span class="picker-panel-header-label year" @click='type="year"'>{{showDate.year}}年</span>
-                <span class="picker-panel-header-label month" @click='type="month"' v-if='type!="month"'>{{showDate.month}}月</span>
+                <span class="picker-panel-header-label month" @click='type="month"' v-if='type=="date"'>{{showDate.month}}月</span>
               </span>
               <span class="picker-panel-header-icon-btn picker-next-btn-arrow-double" @click="handleClickHeaderIcon('nextYear')">>></span>
               <span class="picker-panel-header-icon-btn picker-next-btn" @click="handleClickHeaderIcon('nextMonth')">></span>
@@ -20,6 +20,7 @@
     <div class="picker-panel-content">
       <date-table v-show='type=="date"' @handleDayCell='handleDayCell' :cells='dateCells'></date-table>
       <month-table v-show='type=="month"' @handleMonthCell='handleMonthCell' :cells='monthCells'></month-table>
+      <year-table v-show='type=="year"' @handleYearCell='handleYearCell' :cells='yearCells'></year-table>
     </div>
   </div>
 </template>
@@ -54,6 +55,7 @@ export default {
   created() {
     this.dateCells = getDaysArr(this.selectedDate, this.selectedDate);
     this.monthCells = initMonthCells(this.showDate, this.selectedDate);
+    this.yearCells = initYearCells(this.showDate, this.selectedDate);
   },
   mounted() {
     console.log(this.dateCells);
@@ -105,7 +107,6 @@ export default {
         this.selectedDate
       );
       this.monthCells = initMonthCells(this.showDate, this.selectedDate);
-      console.log(this.monthCells);
     },
     handleDayCell(cell) {
       let date = {
@@ -133,6 +134,9 @@ export default {
         },
         this.selectedDate
       );
+    },
+    handleYearCell(cell) {
+      console.log(cell);
     }
   },
   components: {
@@ -269,6 +273,15 @@ function initMonthCells(showDate, selectedDate) {
       selected: isSelected,
       year: showDate.year
     });
+  }
+  return arr;
+}
+function initYearCells(showDate, selectedDate) {
+  let startYear = Math.floor(selectedDate.year / 10) * 10;
+  let arr = [];
+  for (let i = 1; i <= 10; i++) {
+    let year = startYear + i - 1;
+    arr.push({ year, selected: selectedDate.year == year });
   }
   return arr;
 }
