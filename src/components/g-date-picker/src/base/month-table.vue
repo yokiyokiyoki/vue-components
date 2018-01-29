@@ -23,7 +23,7 @@ export default {
       ];
     },
     handleCell(cell) {
-      this.$emit("handleCell", cell);
+      this.$emit("handleMonthCell", cell);
     }
   }
 };

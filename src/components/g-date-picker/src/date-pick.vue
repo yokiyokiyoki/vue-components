@@ -19,7 +19,7 @@
     </div>
     <div class="picker-panel-content">
       <date-table v-show='type=="date"' @handleDayCell='handleDayCell' :cells='dateCells'></date-table>
-      <month-table v-show='type=="month"' @handleDayCell='handleMonthCell' :cells='monthCells'></month-table>
+      <month-table v-show='type=="month"' @handleMonthCell='handleMonthCell' :cells='monthCells'></month-table>
     </div>
   </div>
 </template>
@@ -122,6 +122,17 @@ export default {
       this.monthCells = initMonthCells(this.showDate, this.selectedDate);
     },
     handleMonthCell(cell) {
+      this.type = "date";
+      this.showDate.year = cell.year;
+      this.showDate.month = cell.month;
+      this.dateCells = getDaysArr(
+        {
+          year: this.showDate.year,
+          month: this.showDate.month,
+          day: 1
+        },
+        this.selectedDate
+      );
       console.log(cell);
     }
   },
