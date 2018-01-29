@@ -133,7 +133,6 @@ export default {
         },
         this.selectedDate
       );
-      console.log(cell);
     }
   },
   components: {
