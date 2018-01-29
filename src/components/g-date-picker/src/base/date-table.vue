@@ -1,5 +1,5 @@
 <template>
-    <div class="picker-panel-date-content-cells ">
+    <div class="picker-panel-content-date-cells">
         <div class="cells-header">
             <span v-for='day in headerDays' :key='day'>{{day}}</span>
         </div>

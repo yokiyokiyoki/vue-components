@@ -11,8 +11,8 @@
           <span class="picker-panel-header-icon-btn picker-prev-btn" @click="handleClickHeaderIcon('lastMonth')">
             < </span>
               <span>
-                <span class="picker-panel-header-label year">{{showDate.year}}年</span>
-                <span class="picker-panel-header-label month">{{showDate.month}}月</span>
+                <span class="picker-panel-header-label year" @click='type="year"'>{{showDate.year}}年</span>
+                <span class="picker-panel-header-label month" @click='type="month"'>{{showDate.month}}月</span>
               </span>
               <span class="picker-panel-header-icon-btn picker-next-btn-arrow-double" @click="handleClickHeaderIcon('nextYear')">>></span>
               <span class="picker-panel-header-icon-btn picker-next-btn" @click="handleClickHeaderIcon('nextMonth')">></span>
