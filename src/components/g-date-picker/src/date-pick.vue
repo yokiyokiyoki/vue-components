@@ -103,11 +103,32 @@
                   color: @hoverColor;
                 }
               }
+              &-today {
+                em {
+                  position: relative;
+                  &::after {
+                    display: block;
+                    content: '';
+                    background-color: @selectedBgColor;
+                    width: 6px;
+                    height: 6px;
+                    position: absolute;
+                    right: 0px;
+                    top: 0px;
+                    border-radius: 50%;
+                  }
+                }
+              }
               &-selected {
                 background: @selectedBgColor;
                 color: @selectedFontColor;
                 &:hover {
                   color: @selectedFontColor;
+                }
+                em {
+                  &::after {
+                    background-color: @selectedFontColor;
+                  }
                 }
               }
               em {
@@ -133,9 +154,9 @@
   <div class="picker-panel">
     <div class="picker-panel-header">
       <span class="picker-panel-header-icon-btn picker-prev-btn-arrow-double" @click="handleClickHeaderIcon('lastYear')">
-        <<</span>
+        << </span>
           <span class="picker-panel-header-icon-btn picker-prev-btn" @click="handleClickHeaderIcon('lastMonth')">
-            <</span>
+            < </span>
               <span>
                 <span class="picker-panel-header-label year">{{showDate.year}}年</span>
                 <span class="picker-panel-header-label month">{{showDate.month}}月</span>
@@ -219,7 +240,8 @@
             [`cell-disabled`]: cell.disabled,
             [`cell-prev-month`]: cell.type === "prev-month",
             [`cell-next-month`]: cell.type === "next-month",
-            [`cell-this-month`]: cell.type === "this-month"
+            [`cell-this-month`]: cell.type === "this-month",
+            [`cell-today`]: cell.isToday
           }
         ];
       },
@@ -250,7 +272,9 @@
     // console.log(moment(`${year}/${month}/${day}`));
     //选中的日期
     let selectedDate = `${this.selectedDate.year}/${this.selectedDate.month}/${this.selectedDate.day}`
-    console.log()
+    //今天
+    let todayDate = `${new Date().getFullYear()}/${new Date().getMonth()+1}/${new Date().getDate()}`
+    console.log(todayDate)
     let dateArr = [];
     // 获取当月多少天
     let days = getMonthDays(year, month);
@@ -268,7 +292,9 @@
     for (let i = 0; i < thisMonthFirstDayInWeek; i++) {
       let day = preDays - thisMonthFirstDayInWeek + i + 1;
       let lastMonthYear = prevMonth == 12 ? year - 1 : year;
-      let isSelected = selectedDate == `${lastMonthYear}/${prevMonth}/${day}` ? true : false;
+      let date = `${lastMonthYear}/${prevMonth}/${day}`
+      let isSelected = selectedDate == date ? true : false;
+      let isToday = date == todayDate ? true : false
       dateArr.push({
         //日期天数
         day,
@@ -282,11 +308,14 @@
         month: prevMonth,
         //是否是选中的那天
         selected: isSelected,
+        isToday
       });
     }
     //当月在日历的显示
     for (let i = 1; i <= days; i++) {
-      let isSelected = selectedDate == `${year}/${month}/${i}` ? true : false;
+      let date = `${year}/${month}/${i}`
+      let isSelected = selectedDate == date ? true : false;
+      let isToday = date == todayDate ? true : false
       dateArr.push({
         //日期天数
         day: i,
@@ -299,13 +328,16 @@
         //所属年
         year,
         //所属月
-        month
+        month,
+        isToday
       });
     }
     //下个月，换到下一行就是14，该行就用7
     for (let i = 1; i < 14 - thisMonthLastDayInWeek; i++) {
+      let date = `${nextMonthYear}/${nextMonth}/${i}`
       let nextMonthYear = nextMonth == 1 ? year + 1 : year;
-      let isSelected = selectedDate == `${nextMonthYear}/${nextMonth}/${i}` ? true : false;
+      let isSelected = selectedDate == date ? true : false;
+      let isToday = date == todayDate ? true : false
       dateArr.push({
         //日期天数
         day: i,
@@ -319,6 +351,7 @@
         month: nextMonth,
         //是否是选中的那天
         selected: isSelected,
+        isToday
       });
     }
     return dateArr;
