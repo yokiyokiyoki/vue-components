@@ -1,11 +1,11 @@
 <template>
-  <div class="picker-panel-content-month-cells">
-      <div class="cells-content">
+    <div class="picker-panel-content-month-cells">
+        <div class="cells-content">
             <span :class="getCellCls(cell)" v-for='(cell,index) in cells' :key='index' @click='handleCell(cell)'>
                 <em>{{cell.month}}月</em>
             </span>
         </div>
-  </div>
+     </div>
 </template>
 <script>
 export default {
