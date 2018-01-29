@@ -210,9 +210,9 @@ function getDaysArr({ year, month, day }, selectedDate = {}) {
       // 所属年
       year: lastMonthYear,
       // 所属月
-      month: prevMonth,
+      month: prevMonth
       // 是否是选中的那天
-      selected: isSelected
+      // selected: isSelected
     });
   }
   // 当月在日历的显示
@@ -252,9 +252,9 @@ function getDaysArr({ year, month, day }, selectedDate = {}) {
       // 所属年
       year: nextMonthYear,
       // 所属月
-      month: nextMonth,
+      month: nextMonth
       // 是否是选中的那天
-      selected: isSelected
+      // selected: isSelected
     });
   }
   return dateArr;
