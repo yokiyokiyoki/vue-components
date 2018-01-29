@@ -174,7 +174,6 @@
             <em>{{cell.day}}</em>
           </span>
         </div>
-
       </div>
     </div>
   </div>
@@ -274,7 +273,7 @@
     let selectedDate = `${this.selectedDate.year}/${this.selectedDate.month}/${this.selectedDate.day}`
     //今天
     let todayDate = `${new Date().getFullYear()}/${new Date().getMonth()+1}/${new Date().getDate()}`
-    console.log(todayDate)
+
     let dateArr = [];
     // 获取当月多少天
     let days = getMonthDays(year, month);
@@ -294,7 +293,7 @@
       let lastMonthYear = prevMonth == 12 ? year - 1 : year;
       let date = `${lastMonthYear}/${prevMonth}/${day}`
       let isSelected = selectedDate == date ? true : false;
-      let isToday = date == todayDate ? true : false
+      // let isToday = date == todayDate ? true : false
       dateArr.push({
         //日期天数
         day,
@@ -308,7 +307,6 @@
         month: prevMonth,
         //是否是选中的那天
         selected: isSelected,
-        isToday
       });
     }
     //当月在日历的显示
@@ -337,7 +335,7 @@
       let date = `${nextMonthYear}/${nextMonth}/${i}`
       let nextMonthYear = nextMonth == 1 ? year + 1 : year;
       let isSelected = selectedDate == date ? true : false;
-      let isToday = date == todayDate ? true : false
+      // let isToday = date == todayDate ? true : false
       dateArr.push({
         //日期天数
         day: i,
@@ -351,7 +349,6 @@
         month: nextMonth,
         //是否是选中的那天
         selected: isSelected,
-        isToday
       });
     }
     return dateArr;
