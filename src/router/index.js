@@ -4,6 +4,7 @@ const Index = () => import('@/page/Index')
 const Chart = () => import('@/page/chart')
 const Ripple = () => import('@/page/ripple')
 const Calendar = () => import('@/page/calendar')
+const Input = () => import('@/page/input')
 
 Vue.use(Router)
 export default new Router({
@@ -27,6 +28,11 @@ export default new Router({
       path: '/calendar',
       name: 'Calendar',
       component: Calendar
+    },
+    {
+      path: '/input',
+      name: 'Input',
+      component: Input
     }
   ]
 })
