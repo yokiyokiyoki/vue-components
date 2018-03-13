@@ -3,7 +3,6 @@
   height: 100%;
   width: 100%;
 }
-
 </style>
 
 <template>
@@ -11,6 +10,7 @@
 </template>
 <script>
 import ec from "echarts";
+import "echarts-wordcloud";
 const R = require("ramda");
 // enumerating ECharts events 枚举echarts事件
 const ACTION_EVENTS = [
@@ -61,7 +61,8 @@ export default {
   methods: {
     init() {
       this.$nextTick(() => {
-        document.addEventListener(window, "resize", this.resizeEventHandler);
+        console.log(this.instance);
+        window.addEventListener("resize", this._resizeEventHandler, false);
         this.initOption();
       });
     },
@@ -113,7 +114,7 @@ export default {
     }
   },
   beforeDestroy() {
-    document.removeEventListener(window, "resize", this.resizeEventHandler);
+    window.addEventListener("resize", this._resizeEventHandler, false);
   }
 };
 
