@@ -58,10 +58,26 @@ export default {
   mounted() {
     this.init();
   },
+  watch: {
+    // options(val, oldVal) {
+    //   console.log(val);
+    //   this.$nextTick(() => {
+    //     this.initOption();
+    //   });
+    // }
+    options: {
+      handler: function(val, oldVal) {
+        console.log(val);
+        this.$nextTick(() => {
+          this.initOption();
+        });
+      },
+      deep: true
+    }
+  },
   methods: {
     init() {
       this.$nextTick(() => {
-        console.log(this.instance);
         window.addEventListener("resize", this._resizeEventHandler, false);
         this.initOption();
       });
@@ -70,7 +86,7 @@ export default {
       if (this.dataComplete) {
         if (!R.isEmpty(this.options)) {
           if (this.options.series && this.options.series.length != 0) {
-            this.instance = ec.init(this.$el, "default");
+            !this.instance && (this.instance = ec.init(this.$el, "default"));
             this.instance.setOption(this.options, true);
             // expose ECharts events as custom events（遍历echart事件emit）
             ACTION_EVENTS.forEach(event => {
@@ -84,6 +100,9 @@ export default {
               });
             });
           } else {
+            //series没有的时候则销毁该实例
+            this.instance.dispose();
+            this.instance = null;
             this.isEmptyData = true;
           }
         } else {

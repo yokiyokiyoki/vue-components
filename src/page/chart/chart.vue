@@ -9,6 +9,8 @@
 <template>
   <div>
       <button @click='$router.push("/")'>back</button>
+      <button @click='add'>添加series</button>
+      <button @click='remove'>删除series</button>
       <div class="box">
         <g-chart :options="opt" :data-complete="dataComplete"></g-chart>
       </div>
@@ -24,8 +26,27 @@ export default {
   },
   created() {
     this.opt = handleOpt();
-
     this.dataComplete = true;
+    console.log(this.opt);
+  },
+  methods: {
+    add() {
+      this.opt.series.push({
+        data: [
+          Math.round(Math.random() * 1000),
+          Math.round(Math.random() * 1000),
+          Math.round(Math.random() * 1000),
+          Math.round(Math.random() * 1000),
+          Math.round(Math.random() * 1000),
+          Math.round(Math.random() * 1000),
+          Math.round(Math.random() * 1000)
+        ],
+        type: "line"
+      });
+    },
+    remove() {
+      this.opt.series.pop();
+    }
   }
 };
 function handleOpt() {
