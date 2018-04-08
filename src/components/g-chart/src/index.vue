@@ -1,17 +1,32 @@
 <style lang="less" scoped>
-.chart-box {
-  height: 100%;
-  width: 100%;
-}
+// .chart-box {
+//   height: 100%;
+//   width: 100%;
+//   .empty {
+//     text-align: center;
+//     height: 100%;
+//     box-sizing: border-box;
+//     position: relative;
+//     span {
+//       position: absolute;
+//       left: 50%;
+//       top: 50%;
+//       transform: translate(-50%, -50%);
+//       color: #999999;
+//     }
+//   }
+// }
 </style>
 
 <template>
-    <div class="chart-box" ></div>
+    <div class="chart-box" ref='chart-box'></div>
 </template>
 <script>
 import ec from "echarts";
 import "echarts-wordcloud";
 const R = require("ramda");
+import Vue from "vue";
+import "./index.less";
 // enumerating ECharts events 枚举echarts事件
 const ACTION_EVENTS = [
   "legendselectchanged",
@@ -51,8 +66,7 @@ export default {
   name: "g-chart",
   data() {
     return {
-      instance: null, //echart实例
-      isEmptyData: false //是否是空数据
+      instance: null //echart实例
     };
   },
   props: {
@@ -69,6 +83,12 @@ export default {
         return {};
       },
       required: true
+    },
+    emptyText: {
+      type: String,
+      default() {
+        return "暂无数据";
+      }
     }
   },
   mounted() {
@@ -110,12 +130,12 @@ export default {
             });
           } else {
             //series没有的时候则销毁该实例
-            this.instance.dispose();
+            this.instance && this.instance.dispose();
             this.instance = null;
-            this.isEmptyData = true;
+            this.noDataOption();
           }
         } else {
-          this.isEmptyData = true;
+          this.noDataOption();
         }
       }
     },
@@ -123,6 +143,17 @@ export default {
       if (this.instance) {
         throttle(this.instance.resize(), 300);
       }
+    },
+    noDataOption() {
+      //如果node存在子节点则先删除
+      while (this.$refs["chart-box"].firstChild) {
+        this.$refs["chart-box"].removeChild(this.$refs["chart-box"].firstChild);
+      }
+      let emptyComponent = Vue.extend({
+        template: "<div class='empty'><span>" + this.emptyText + "</span></div>"
+      });
+      let empty = new emptyComponent().$mount();
+      this.$refs["chart-box"].appendChild(empty.$el);
     }
   },
   beforeDestroy() {
