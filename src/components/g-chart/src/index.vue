@@ -1,23 +1,3 @@
-<style lang="less" scoped>
-// .chart-box {
-//   height: 100%;
-//   width: 100%;
-//   .empty {
-//     text-align: center;
-//     height: 100%;
-//     box-sizing: border-box;
-//     position: relative;
-//     span {
-//       position: absolute;
-//       left: 50%;
-//       top: 50%;
-//       transform: translate(-50%, -50%);
-//       color: #999999;
-//     }
-//   }
-// }
-</style>
-
 <template>
     <div class="chart-box" ref='chart-box'></div>
 </template>
