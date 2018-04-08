@@ -55,19 +55,28 @@ export default {
       isEmptyData: false //是否是空数据
     };
   },
+  props: {
+    dataComplete: {
+      type: Boolean,
+      default() {
+        return false;
+      },
+      required: true
+    },
+    options: {
+      type: Object,
+      default() {
+        return {};
+      },
+      required: true
+    }
+  },
   mounted() {
     this.init();
   },
   watch: {
-    // options(val, oldVal) {
-    //   console.log(val);
-    //   this.$nextTick(() => {
-    //     this.initOption();
-    //   });
-    // }
     options: {
       handler: function(val, oldVal) {
-        console.log(val);
         this.$nextTick(() => {
           this.initOption();
         });
@@ -114,22 +123,6 @@ export default {
       if (this.instance) {
         throttle(this.instance.resize(), 300);
       }
-    }
-  },
-  props: {
-    dataComplete: {
-      type: Boolean,
-      default() {
-        return false;
-      },
-      required: true
-    },
-    options: {
-      type: Object,
-      default() {
-        return {};
-      },
-      required: true
     }
   },
   beforeDestroy() {
