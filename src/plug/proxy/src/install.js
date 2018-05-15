@@ -13,9 +13,7 @@ const install = function (Vue, option = {}) {
   Util(Vue)
   Vue.prototype.$proxy = (ajaxParams = {}, ajaxOpt) => {
     // 根据url和data生成唯一key
-    const ajaxKey = `${ajaxParams.url}?${JSON.stringify(
-      ajaxParams.data || ajaxParams.params || null
-    )}`
+    const ajaxKey = `${ajaxParams.url}`
     ajaxOpt = Object.assign(
       {
         mock: false, // 默认不开启mock数据
