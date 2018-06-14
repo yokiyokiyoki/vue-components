@@ -1,18 +1,23 @@
-.chart-box {
+.chart-container {
   height: 100%;
   width: 100%;
-  .empty {
-    text-align: center;
+  position: relative;
+  .chart-box {
     height: 100%;
-    box-sizing: border-box;
-    position: relative;
-    span {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 13px;
-      color: #999999;
+    width: 100%;
+    .empty {
+      text-align: center;
+      height: 100%;
+      box-sizing: border-box;
+      position: relative;
+      span {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 13px;
+        color: #999999;
+      }
     }
   }
 }
