@@ -87,7 +87,7 @@ export default {
   methods: {
     init() {
       this.$nextTick(() => {
-        window.addEventListener("resize", this._resizeEventHandler, false);
+        window.addEventListener("resize", this.resizeEventHandler, false);
         this.initOption();
       });
     },
@@ -137,7 +137,7 @@ export default {
     }
   },
   beforeDestroy() {
-    window.addEventListener("resize", this._resizeEventHandler, false);
+    window.addEventListener("resize", this.resizeEventHandler, false);
   }
 };
 
