@@ -7,6 +7,8 @@
 import ec from 'echarts'
 import 'echarts-wordcloud'
 const R = require('ramda')
+//引入中国地图
+import 'echarts/map/js/china'
 import Vue from 'vue'
 import './index.less'
 // enumerating ECharts events 枚举echarts事件
